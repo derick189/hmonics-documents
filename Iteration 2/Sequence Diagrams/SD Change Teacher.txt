@@ -1,0 +1,24 @@
+
+title Change Teacher
+
+participant User
+participant Start\nScreen
+participant GdxGame
+participant Teacher\nScreen
+participant ScreenManager
+participant DataManager
+
+User->Start\nScreen: press teacher screen
+Start\nScreen->ScreenManager: changeScreen(screenType)
+ScreenManager->GdxGame: setScreen(screen)
+Teacher\nScreen->ScreenManager:formatTeachers()
+ScreenManager->DataManager: getTeachers()
+DataManager-->Teacher\nScreen: show teachers
+
+User->Teacher\nScreen: select add teacher
+Teacher\nScreen->DataManager: createTeacher(name)
+DataManager->DataManager: add to teachers
+
+User->Teacher\nScreen: select remove teacher
+Teacher\nScreen->DataManager: removeTeacher(name)
+DataManager->DataManager: remove from teachers
