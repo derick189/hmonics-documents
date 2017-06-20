@@ -1,0 +1,26 @@
+
+title Get Report
+
+participant User
+participant Start\nScreen
+participant GdxGame
+participant Teacher\nScreen
+participant ScreenManager
+participant DataManager
+
+User->Start\nScreen: press teacher screen
+Start\nScreen->ScreenManager: changeScreen(screenType)
+ScreenManager->GdxGame: setScreen(screen)
+Teacher\nScreen->ScreenManager:formatTeachers()
+ScreenManager->DataManager: getTeachers()
+DataManager-->Teacher\nScreen: show teachers
+
+User->Teacher\nScreen: select a teacher
+Teacher\nScreen->ScreenManager:formatStudents(teacher)
+ScreenManager->DataManager: getStudents(teacher)
+DataManager-->Teacher\nScreen: show students
+
+User->Teacher\nScreen: select a student
+Teacher\nScreen->ScreenManager:viewReport()
+ScreenManager->ScreenManager: formatHistories(student)
+ScreenManager-->Teacher\nScreen: show histories

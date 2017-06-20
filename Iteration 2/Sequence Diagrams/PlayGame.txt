@@ -1,0 +1,36 @@
+
+title Play Game
+
+participant User
+participant Spelling\nGame\nScreen
+participant SpellingGame\nStateMachine
+participant DataManager
+participant Word
+participant History
+participant ScreenManager
+
+loop while game is not over
+User->Spelling\nGame\nScreen: drag letter into slot
+Spelling\nGame\nScreen->SpellingGame\nStateMachine: doEvent(DROPPED_LETTER)
+SpellingGame\nStateMachine->SpellingGame\nStateMachine: wordIsCorrect()
+SpellingGame\nStateMachine->Spelling\nGame\nScreen: getWordInSlots()
+Spelling\nGame\nScreen-->SpellingGame\nStateMachine: String
+SpellingGame\nStateMachine->Word: getSpelling(language)
+Word-->SpellingGame\nStateMachine: String
+opt if correct
+SpellingGame\nStateMachine->SpellingGame\nStateMachine: recordWord()
+SpellingGame\nStateMachine->DataManager: addWord(student, wordId)
+DataManager-> History: addWord(wordId)
+alt before 10 words
+SpellingGame\nStateMachine->SpellingGame\nStateMachine:changeToNextWord()
+SpellingGame\nStateMachine->DataManager: getNextWord()
+DataManager-->SpellingGame\nStateMachine: Word
+SpellingGame\nStateMachine->Spelling\nGame\nScreen:setPictureAndSlots(pictureId, wordLength)
+else after 10 words
+SpellingGame\nStateMachine->SpellingGame\nStateMachine: doEvent(GAME_OVER)
+SpellingGame\nStateMachine->ScreenManager: goBack()
+ScreenManager->ScreenManager: changeScreen\n(previousScreen)
+destroy Spelling\nGame\nScreen
+destroy SpellingGame\nStateMachine
+end
+end
