@@ -1,0 +1,20 @@
+
+title Change Teacher
+
+participant User
+participant ScreenManager
+participant DataManager
+participant Teacher
+participant Student
+
+opt
+User->ScreenManager: indicate add teacher
+ScreenManager->DataManager: addTeacher(teacher)
+DataManager->Teacher: add(teacher)
+end
+
+opt
+User->ScreenManager: indicate remove teacher
+ScreenManager->DataManager: removeTeacher(teacherIndex)
+DataManager->Teacher: remove(teacherIndex)
+end

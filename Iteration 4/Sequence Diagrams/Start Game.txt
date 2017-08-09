@@ -1,0 +1,13 @@
+
+title Start Game
+
+participant User
+participant ScreenManager
+participant Spelling\nGame\nScreen
+participant SpellingGame\nManager
+
+User->ScreenManager: indicate to start a game
+ScreenManager->*Spelling\nGame\nScreen:new SpellingGameScreen
+Spelling\nGame\nScreen->*SpellingGame\nManager: new SpellingGameStateMachine
+SpellingGame\nManager->SpellingGame\nManager:changeToNextWord()
+SpellingGame\nManager->Spelling\nGame\nScreen:setPictureAndSlots(pictureId, wordLength)

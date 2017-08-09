@@ -1,0 +1,22 @@
+
+title Change Student
+
+participant User
+participant ScreenManager
+participant DataManager
+participant Teacher
+participant Student
+
+opt
+User->ScreenManager: indicate add student
+ScreenManager->DataManager: addStudent(teacherIndex, student)
+DataManager->Teacher: get(teacherIndex).getStudents()
+Teacher->Student: add(student)
+end
+
+opt
+User->ScreenManager: indicate remove student
+ScreenManager->DataManager: removeStudent(TeacherIndex,\nStudentIndex)
+DataManager->Teacher: get(teacherIndex).getStudents()
+Teacher->Student: remove(studentIndex)
+end

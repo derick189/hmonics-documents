@@ -1,0 +1,16 @@
+
+title Get Report
+
+participant User
+participant ScreenManager
+participant DataManager
+participant Teacher
+participant Student
+
+User->ScreenManager: indicate get report
+ScreenManager->Teacher: get(teacherIndex).getStudents()
+Teacher->Student:get(studentIndex)
+Student-->ScreenManager: student
+ScreenManager->DataManager: getHistory(student)
+DataManager->Student: getGameHistory()
+Student-->ScreenManager: ArrayList<History>

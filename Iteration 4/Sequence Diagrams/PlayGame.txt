@@ -1,0 +1,25 @@
+
+title Play Game
+
+participant User
+participant Spelling\nGame\nScreen
+participant SpellingGame\nManager
+participant ScreenManager
+participant Word
+participant Student
+participant DataManager
+participant History
+
+loop while game is not over
+User->Spelling\nGame\nScreen: drag letter into space
+Spelling\nGame\nScreen->SpellingGame\nManager: droppedLetter(letter)
+opt if word is correct
+SpellingGame\nManager->SpellingGame\nManager: recordWord()
+SpellingGame\nManager->ScreenManager: getSelectedStudent()
+ScreenManager-->SpellingGame\nManager:selectedStudent
+SpellingGame\nManager->Word:getSpelling(currentLanguage)
+Word-->SpellingGame\nManager:spelling of current word
+SpellingGame\nManager->Student:addToCurrentHistory(spelling)
+Student->History:addWord(word)
+end
+end
